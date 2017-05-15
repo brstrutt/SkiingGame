@@ -48,17 +48,21 @@ EShaderError OGLShader::CreateShaderFromSourceFile(LPCWSTR filename, EShaderType
 
 	m_shaderInternal._type = type;
 
-	if(type == SHADER_UNDEFINED)
-		return SHADER_ERROR_CREATE;
+	if(type == SHADER_UNDEFINED) return SHADER_ERROR_CREATE;
 
 	GLhandleARB shaderhandle;
 	GLenum shadertype;
 
 	switch(type)
 	{
-		case SHADER_VERTEX: shadertype = GL_VERTEX_SHADER; break;
-		case SHADER_FRAGMENT: shadertype = GL_FRAGMENT_SHADER; break;
-		case SHADER_UNDEFINED: break;
+		case SHADER_VERTEX: 
+			shadertype = GL_VERTEX_SHADER; 
+			break;
+		case SHADER_FRAGMENT: 
+			shadertype = GL_FRAGMENT_SHADER; 
+			break;
+		case SHADER_UNDEFINED: 
+			break;
 	}
 
 	//Create a shader handle from the device.
@@ -75,17 +79,18 @@ EShaderError OGLShader::CreateShaderFromSourceFile(LPCWSTR filename, EShaderType
 	char* source;
 	TextFileBufferedRead(filename, &source);
 	//upload the source code to the shader program
+	GAME CRASHES HERE
 	glShaderSource(shaderhandle, 1, (const char**)&source, NULL);
-	delete [] source;
+	//delete [] source;
 
 	//TODO: Search documents to find out the way to catch shader compilation errors etc.
 
 	//compile the bugger.
-	GLint result = 0;
-	glCompileShader(shaderhandle);
-	glGetShaderiv(shaderhandle, GL_INFO_LOG_LENGTH, &result);
+	//GLint result = 0;
+	//glCompileShader(shaderhandle);
+	//glGetShaderiv(shaderhandle, GL_INFO_LOG_LENGTH, &result);
 	
-	if(result > 0)
+	/*if(result > 0)
 	{
 		char* log = new char[result];
 		int charlen = 0;
@@ -93,7 +98,7 @@ EShaderError OGLShader::CreateShaderFromSourceFile(LPCWSTR filename, EShaderType
 
 		fprintf(stdout, "Shader log %s\n", log);
 		delete [] log;
-	}
+	}*/
 
 	return SHADER_ERROR_NONE;
 }
