@@ -205,15 +205,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OGLTerrainManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OGLMeshCollider.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OGLBillboard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PhysicsObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -225,6 +216,15 @@
     </ClCompile>
     <ClCompile Include="Collider.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OGLBillboard.cpp">
+      <Filter>Source Files\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="OGLMeshCollider.cpp">
+      <Filter>Source Files\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="OGLTerrainManager.cpp">
+      <Filter>Source Files\OpenGL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

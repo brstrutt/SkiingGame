@@ -75,7 +75,7 @@ void BaseApplication::CreateApplicationWindow( int width, int height, ERenderSys
 	{
 		m_appwnd = new OGLWindow();
 		m_appwnd->InitWindow(m_hInst, width, height);
-		//m_appwnd->SetVisible(TRUE);
+		m_appwnd->SetVisible(TRUE);
 	}
 }
 

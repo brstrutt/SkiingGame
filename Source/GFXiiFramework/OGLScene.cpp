@@ -46,9 +46,9 @@ void OGLScene::CreateScene()
 {
 	theSkybox = new OGLSkybox();
 	theSkybox->Init();
-	
+
 	floorTer = new OGLTerrainManager(-1, 50, 10.0);
-			
+
 	OGLMesh *atat = new OGLMesh(L"../asset/models/AT-ATseanbdesigns.obj", "../asset/texture/crate.tga");
 	RenderableObject<OGLMesh>* tempatat = new RenderableObject<OGLMesh>();
 	tempatat->SetRenderable(atat);
@@ -62,7 +62,7 @@ void OGLScene::CreateScene()
 	atatCollider1->SetMaxSpeed(0);
 	atatCollider1->MakeStatic();
 	physics.push_back(atatCollider1);
-	
+
 	mover = OGLSpaceship();
 
 	OGLMesh *UFO = new OGLMesh(L"../asset/models/UFO.obj", "../asset/texture/tiles_colour.tga");
@@ -122,7 +122,7 @@ void OGLScene::Update()
 			
 			//mover.GetMesh()->SetRotation(1,0,2.14159);
 			mover.~OGLSpaceship();
-		}		
+		}
 	}
 
 	std::vector<int> indexesToRemove;
@@ -152,7 +152,7 @@ void OGLScene::Update()
 		if (moverActive)
 		{
 			mover.CheckCollision(physics.at(i));
-		}		
+		}
 	}
 
 	for (int i = 0; i < indexesToRemove.size(); i++)
@@ -162,9 +162,9 @@ void OGLScene::Update()
 }
 
 void OGLScene::Render()
-{	
+{
 	RendSky();
-	RendTerr();	
+	RendTerr();
 
 	RendMesh();
 
@@ -173,7 +173,7 @@ void OGLScene::Render()
 
 	floorTer->RenderSea(glGetUniformLocation(meshShader->GetProgramHandle(), "model"), glGetUniformLocation(meshShader->GetProgramHandle(), "scale"));
 
-	RendBill();	
+	RendBill();
 
 	glDisable(GL_DEPTH_TEST);
 
@@ -204,8 +204,6 @@ void OGLScene::RendMesh()
 	glUniform3fv(glGetUniformLocation(meshShader->GetProgramHandle(), "cameraPosition"), 1, theCamera->GetCameraPosition()->GetData());
 	glUniform1i(glGetUniformLocation(meshShader->GetProgramHandle(), "texColour"), 0);
 
-	
-
 	for each (Renderable* prenderable in renderables)
 	{
 		glUniformMatrix4fv(glGetUniformLocation(meshShader->GetProgramHandle(), "model"), 1, GL_FALSE, prenderable->GetModelMatrix().GetMatrix());
@@ -227,7 +225,7 @@ void OGLScene::RendMesh()
 		glUniformMatrix4fv(glGetUniformLocation(meshShader->GetProgramHandle(), "model"), 1, GL_FALSE, physics.at(i)->GetMesh()->GetModelMatrix().GetMatrix());
 		glUniform1f(glGetUniformLocation(meshShader->GetProgramHandle(), "scale"), physics.at(i)->GetMesh()->GetScale());
 		physics.at(i)->GetMesh()->GetRenderable()->Render();		
-	}	
+	}
 }
 
 void OGLScene::RendTerr()
@@ -272,7 +270,7 @@ void OGLScene::RendHUD()
 			glUniform3fv(glGetUniformLocation(billboardShader->GetProgramHandle(), "billboardUp"), 1, satPointer->GetRotation().GetData());
 
 			satPointer->Render();
-		}		
+		}
 	}
 
 	if (moverActive)
@@ -287,7 +285,7 @@ void OGLScene::RendHUD()
 		glUniform3fv(glGetUniformLocation(billboardShader->GetProgramHandle(), "billboardUp"), 1, ufoPointer->GetRotation().GetData());
 		ufoPointer->Render();
 	}
-	
+
 
 	HUDShader->ActivateShaderProgram();
 

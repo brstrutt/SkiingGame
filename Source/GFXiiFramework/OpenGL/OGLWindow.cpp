@@ -113,7 +113,7 @@ BOOL OGLWindow::InitWindow(HINSTANCE hInstance, int width, int height)
 
 	InitOGLState();
 
-	/*m_width = width;
+	m_width = width;
 	m_height = height;
 
 	m_scene.CreateScene();	
@@ -128,7 +128,7 @@ BOOL OGLWindow::InitWindow(HINSTANCE hInstance, int width, int height)
 	m_scene.SetPlayer(&playerChar);
 	m_scene.CreateHUD(&m_width, &m_height);
 	m_scene.SetShaderPrograms(m_skybox_shader, m_terrain_shader, m_shader, m_billboard_shader, m_hud_shader);
-	m_scene.SetCamera(&m_camera);*/
+	m_scene.SetCamera(&m_camera);
 
 	return TRUE;
 }
@@ -173,21 +173,21 @@ void OGLWindow::InitOGLState()
 
 	m_shader->CreateShaderProgram();
 	m_shader->AttachAndCompileShaderFromFile(L"../asset/shader/glsl/testing.vert", SHADER_VERTEX);
-	//m_shader->AttachAndCompileShaderFromFile(L"../asset/shader/glsl/testing.frag", SHADER_FRAGMENT);
+	m_shader->AttachAndCompileShaderFromFile(L"../asset/shader/glsl/testing.frag", SHADER_FRAGMENT);
 
-	//m_shader->BindAttributeLocation( 0, "position" );
-	//m_shader->BindAttributeLocation( 1, "inNormal" );
-	//m_shader->BindAttributeLocation( 2, "inUV" );
+	m_shader->BindAttributeLocation( 0, "position" );
+	m_shader->BindAttributeLocation( 1, "inNormal" );
+	m_shader->BindAttributeLocation( 2, "inUV" );
 
-	//glBindFragDataLocation( m_shader->GetProgramHandle(), 0, "outFrag" );
+	glBindFragDataLocation( m_shader->GetProgramHandle(), 0, "outFrag" );
 
-	//m_shader->BuildShaderProgram();
+	m_shader->BuildShaderProgram();
 
 
 
 
 	//Initialise skybox shader
-	/*m_skybox_shader = new OGLShaderProgram();
+	m_skybox_shader = new OGLShaderProgram();
 
 	m_skybox_shader->CreateShaderProgram();
 	m_skybox_shader->AttachAndCompileShaderFromFile(L"../asset/shader/glsl/skybox.vert", SHADER_VERTEX);
@@ -199,12 +199,12 @@ void OGLWindow::InitOGLState()
 
 	glBindFragDataLocation(m_skybox_shader->GetProgramHandle(), 0, "outFrag");
 
-	m_skybox_shader->BuildShaderProgram();*/
+	m_skybox_shader->BuildShaderProgram();
 	
 
 
 
-	/*m_terrain_shader = new OGLShaderProgram();
+	m_terrain_shader = new OGLShaderProgram();
 
 	m_terrain_shader->CreateShaderProgram();
 	m_terrain_shader->AttachAndCompileShaderFromFile(L"../asset/shader/glsl/terrain.vert", SHADER_VERTEX);
@@ -216,12 +216,12 @@ void OGLWindow::InitOGLState()
 
 	glBindFragDataLocation(m_terrain_shader->GetProgramHandle(), 0, "outFrag");
 
-	m_terrain_shader->BuildShaderProgram();*/
+	m_terrain_shader->BuildShaderProgram();
 
 
 
 
-	/*m_billboard_shader = new OGLShaderProgram();
+	m_billboard_shader = new OGLShaderProgram();
 
 	m_billboard_shader->CreateShaderProgram();
 	m_billboard_shader->AttachAndCompileShaderFromFile(L"../asset/shader/glsl/billboard.vert", SHADER_VERTEX);
@@ -233,11 +233,11 @@ void OGLWindow::InitOGLState()
 
 	glBindFragDataLocation(m_billboard_shader->GetProgramHandle(), 0, "outFrag");
 
-	m_billboard_shader->BuildShaderProgram();*/
+	m_billboard_shader->BuildShaderProgram();
 
 
 
-	/*m_hud_shader = new OGLShaderProgram();
+	m_hud_shader = new OGLShaderProgram();
 
 	m_hud_shader->CreateShaderProgram();
 	m_hud_shader->AttachAndCompileShaderFromFile(L"../asset/shader/glsl/HUD.vert", SHADER_VERTEX);
@@ -249,17 +249,17 @@ void OGLWindow::InitOGLState()
 
 	glBindFragDataLocation(m_hud_shader->GetProgramHandle(), 0, "outFrag");
 
-	m_hud_shader->BuildShaderProgram();*/
+	m_hud_shader->BuildShaderProgram();
 
 
 	//Create a texture sampler
-	/*glGenSamplers( 1, (GLuint*)(&m_texDefaultSampler) );
+	glGenSamplers( 1, (GLuint*)(&m_texDefaultSampler) );
 	
 	glSamplerParameteri(m_texDefaultSampler , GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);  
 	glSamplerParameteri(m_texDefaultSampler , GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);  
 	glSamplerParameteri(m_texDefaultSampler, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glSamplerParameteri(m_texDefaultSampler, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glSamplerParameterf(m_texDefaultSampler, GL_TEXTURE_MAX_ANISOTROPY_EXT, 16.0);*/
+	glSamplerParameterf(m_texDefaultSampler, GL_TEXTURE_MAX_ANISOTROPY_EXT, 16.0);
 }
 
 BOOL OGLWindow::MouseLBDown ( POINT newLoc )

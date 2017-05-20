@@ -338,7 +338,7 @@ void PhysicsObject::ReactToBox(PhysicsObject* boxObject, PhysicsObject* sphereOb
 		tempBoxDir[smallestDif] -= tempSphereDir[smallestDif];
 		boxObject->SetDir(tempBoxDir);
 		boxObject->UpdateByDir();
-	}	
+	}
 }
 
 void PhysicsObject::ReactToBoxBox(PhysicsObject* box1, PhysicsObject* box2)

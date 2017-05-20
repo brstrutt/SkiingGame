@@ -80,10 +80,9 @@ void Camera::UpdateViewMatrix()
 {
 	float* mat;
 
-	glm::mat4x4 temp = glm::lookAt(
-		glm::vec3(m_position[0], m_position[1], m_position[2]), // Camera is at (4,3,3), in World Space
-		glm::vec3(m_direction[0] + m_position[0], m_direction[1] + m_position[1], m_direction[2] + m_position[2]), // and looks at..
-		glm::vec3(m_upVector[0], m_upVector[1], m_upVector[2]));
+	glm::mat4x4 temp = glm::lookAt(	glm::vec3(m_position[0], m_position[1], m_position[2]), // Camera is at (4,3,3), in World Space
+									glm::vec3(m_direction[0] + m_position[0], m_direction[1] + m_position[1], m_direction[2] + m_position[2]), // and looks at..
+									glm::vec3(m_upVector[0], m_upVector[1], m_upVector[2]));
 
 	mat = glm::value_ptr(temp);
 

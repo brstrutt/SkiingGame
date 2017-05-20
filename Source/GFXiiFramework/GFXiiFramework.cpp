@@ -16,10 +16,10 @@
 #pragma comment (lib, "d3d11.lib")
 #pragma comment (lib, "d3dcompiler.lib")
 
-int APIENTRY WinMain(HINSTANCE hInstance,
-                     HINSTANCE hPrevInstance,
-                     LPSTR    lpCmdLine,
-                     int       nCmdShow)
+int APIENTRY WinMain(	HINSTANCE hInstance,
+						HINSTANCE hPrevInstance,
+						LPSTR lpCmdLine,
+						int nCmdShow)
 {
 	int exitcode = 0;
 	//Allocate a console window
@@ -35,9 +35,9 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	//Create the application instance
 	BaseApplication* myapp = BaseApplication::CreateApplication(hInstance, BaseApplication::RenderSystemOGL);
 	
-	//exitcode = myapp->Run();
+	exitcode = myapp->Run();
 	
-	//myapp->DestroyApplication();
+	myapp->DestroyApplication();
 	
 	ExitProcess(0);
 

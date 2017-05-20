@@ -85,7 +85,7 @@ void Player::GetInput()
 				printf("JUUUUMP\n");
 			}
 		}
-			
+
 		if (GetAsyncKeyState('W'))
 		{
 			if (speed < 0.01)
@@ -125,7 +125,7 @@ void Player::GetInput()
 			}
 
 			ModifyMotionVectorVert(*(theCamera->GetCameraRightVector()) * power);
-		}		
+		}
 
 		if (GetAsyncKeyState('C'))
 		{

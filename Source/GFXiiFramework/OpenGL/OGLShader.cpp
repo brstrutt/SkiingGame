@@ -27,7 +27,7 @@ static void TextFileBufferedRead(LPCWSTR filename, char** buffer)
 		count = fread(*buffer, sizeof(char), count, pfile);
 		(*buffer)[count] = '\0';
 	}
-	
+
 	fclose(pfile);
 
 	return;
@@ -35,7 +35,7 @@ static void TextFileBufferedRead(LPCWSTR filename, char** buffer)
 
 OGLShader::OGLShader()
 {
-	m_ownerProgram = INVALID_SHADER_PROGRAM_HANDLE;	
+	m_ownerProgram = INVALID_SHADER_PROGRAM_HANDLE;
 }
 
 OGLShader::~OGLShader()
@@ -67,30 +67,30 @@ EShaderError OGLShader::CreateShaderFromSourceFile(LPCWSTR filename, EShaderType
 
 	//Create a shader handle from the device.
 	shaderhandle = glCreateShader(shadertype);
-	
+
 	if(shaderhandle == 0 || shaderhandle == GL_INVALID_ENUM || shaderhandle == GL_INVALID_OPERATION)
 	{
 		return SHADER_ERROR_CREATE;
 	}
-	
+
 	m_shaderInternal._syshandle = shaderhandle;	//store the shader handle.
 
 	//TODO: try using AUTO_PTR here?
 	char* source;
 	TextFileBufferedRead(filename, &source);
 	//upload the source code to the shader program
-	GAME CRASHES HERE
 	glShaderSource(shaderhandle, 1, (const char**)&source, NULL);
-	//delete [] source;
+
+	delete [] source;
 
 	//TODO: Search documents to find out the way to catch shader compilation errors etc.
 
 	//compile the bugger.
-	//GLint result = 0;
-	//glCompileShader(shaderhandle);
-	//glGetShaderiv(shaderhandle, GL_INFO_LOG_LENGTH, &result);
+	GLint result = 0;
+	glCompileShader(shaderhandle);
+	glGetShaderiv(shaderhandle, GL_INFO_LOG_LENGTH, &result);
 	
-	/*if(result > 0)
+	if(result > 0)
 	{
 		char* log = new char[result];
 		int charlen = 0;
@@ -98,7 +98,7 @@ EShaderError OGLShader::CreateShaderFromSourceFile(LPCWSTR filename, EShaderType
 
 		fprintf(stdout, "Shader log %s\n", log);
 		delete [] log;
-	}*/
+	}
 
 	return SHADER_ERROR_NONE;
 }

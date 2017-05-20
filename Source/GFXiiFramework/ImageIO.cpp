@@ -94,5 +94,5 @@ EImageIOStatus ImageIO::LoadTGA(const char* filename, unsigned char** buffer, in
 	
 	fclose(pfile);
 
-	return result;	
+	return result;
 }

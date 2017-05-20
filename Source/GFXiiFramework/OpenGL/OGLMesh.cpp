@@ -44,7 +44,7 @@ void OGLMesh::LoadAndBuildMeshFromOBJFile(LPCWSTR filename)
 	Triangle* mesh;
 
 	m_numtriangles = importOBJMesh(filename, &mesh);
-	
+
 	int offset = sizeof(Vector3);
 	int stride = sizeof(Vertex);
 
@@ -63,7 +63,7 @@ void OGLMesh::LoadAndBuildMeshFromOBJFile(LPCWSTR filename)
 
 	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(NULL + 2*offset));
 	glEnableVertexAttribArray(2);
-			
+
 	glBindVertexArray(0);
 
 	delete[] mesh;
