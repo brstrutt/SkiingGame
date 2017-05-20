@@ -1,7 +1,6 @@
 #pragma once
 #include "PhysicsObject.h"
-class AIPhysicsObject :
-	public PhysicsObject
+class AIPhysicsObject : public PhysicsObject
 {
 private:
 	Vector3* playerLocation;
@@ -11,7 +10,4 @@ public:
 	~AIPhysicsObject();
 
 	void Update();
-
-
 };
-

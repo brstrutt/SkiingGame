@@ -9,7 +9,7 @@
 class Renderable
 {
 protected:
-	BaseTexture				*m_tex1, *m_tex2;
+	BaseTexture *m_tex1, *m_tex2;
 	Vector3 m_location;
 	Vector3 m_rotation;
 	float scale;
@@ -24,9 +24,9 @@ public:
 		m_rotation.SetVector(0, 0, 0);
 		scale = 1;
 	}
-	virtual void			Render() = 0;
+	virtual void Render() = 0;
 
-	inline void				SetTexture(bool mainTex, BaseTexture* tex)
+	inline void SetTexture(bool mainTex, BaseTexture* tex)
 	{
 		if (mainTex) m_tex1 = tex;
 		else m_tex2 = tex;

@@ -11,7 +11,7 @@
 class Vector3
 {
 private:
-	float		m_element[3];
+	float m_element[3];
 
 public:
 	Vector3()
@@ -20,12 +20,12 @@ public:
 		m_element[1] = 0.0f;
 		m_element[2] = 0.0f;
 	}
-	
+
 	Vector3(float x, float y, float z)
 	{
 		m_element[0] = x; m_element[1] = y; m_element[2] = z;
 	}
-	
+
 	virtual ~Vector3(){ ; }
 
 	float operator [] (const int i) const;
@@ -38,7 +38,7 @@ public:
 	Vector3 operator * (float scale) const;
 	Vector3 operator / (float scale) const;
 
-	float Norm()	const;
+	float Norm() const;
 	float Norm_Sqr() const;
 	Vector3 Normalise();
 	
@@ -53,10 +53,10 @@ public:
 	}
 
 	void SetZero();
-	
+
 	inline void SetVector(float x, float y, float z)
-	{ 
-		m_element[0] = x; m_element[1] = y; m_element[2] = z; 
+	{
+		m_element[0] = x; m_element[1] = y; m_element[2] = z;
 	}
 };
 

@@ -17,7 +17,7 @@ private:
 	RenderableObject<OGLTerrain>* terr;
 
 	OGLBillboard* theSea;
-		
+
 	void FocusOnPoint(Vector3 newCentre);
 
 	void GenerateTerrain();

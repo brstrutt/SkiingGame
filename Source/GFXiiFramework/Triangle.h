@@ -5,7 +5,7 @@
 class Triangle
 {
 public:
-	Vertex		m_vertices[3];
+	Vertex m_vertices[3];
 public:
 	Triangle();
 	Triangle(Vector3 pos1, Vector3 pos2, Vector3 pos3);

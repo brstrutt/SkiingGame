@@ -7,40 +7,38 @@ class RenderWindow;
 //Define BaseApplication as a singleton
 class BaseApplication
 {
-	public:
-		enum ERenderSystemType
-		{
-			RenderSystemD3D11,
-			RenderSystemOGL
-		};
+public:
+	enum ERenderSystemType
+	{
+		RenderSystemD3D11,
+		RenderSystemOGL
+	};
 
-	private:
-		RenderWindow*				m_appwnd;
-		static BaseApplication*		s_oglapp;
-		BOOL						m_terminate;
-		
-									BaseApplication();
-		virtual						~BaseApplication();
-		void						CreateApplicationWindow(int width, int height, ERenderSystemType type );
-		BOOL						MyRegisterClass(HINSTANCE hinst);
+private:
+	RenderWindow* m_appwnd;
+	static BaseApplication* s_oglapp;
+	BOOL m_terminate;
 
-	public:
+	BaseApplication();
+	virtual ~BaseApplication();
+	void CreateApplicationWindow(int width, int height, ERenderSystemType type );
+	BOOL MyRegisterClass(HINSTANCE hinst);
 
-		HINSTANCE					m_hInst;
+public:
 
-		static BaseApplication*		CreateApplication(HINSTANCE hInst, ERenderSystemType type);
-		static void					DestroyApplication();
-		static BaseApplication*		GetApplication();
+	HINSTANCE m_hInst;
 
-		
-		int							Run();
-		void						Kill();
-		
+	static BaseApplication* CreateApplication(HINSTANCE hInst, ERenderSystemType type);
+	static void DestroyApplication();
+	static BaseApplication* GetApplication();
 
-		inline RenderWindow*			GetApplicationWindow()
-		{
-			return m_appwnd;
-		}
+	int Run();
+	void Kill();
 
-		static	LRESULT CALLBACK	WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
+	inline RenderWindow* GetApplicationWindow()
+	{
+		return m_appwnd;
+	}
+
+	static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 };

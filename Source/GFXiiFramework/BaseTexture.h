@@ -2,6 +2,6 @@
 
 class BaseTexture
 {
-	public:
-		virtual			~BaseTexture() {;}
+public:
+	virtual ~BaseTexture() {;}
 };

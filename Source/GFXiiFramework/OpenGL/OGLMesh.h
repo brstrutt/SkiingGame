@@ -8,9 +8,9 @@
 class OGLMesh : public Renderable
 {
 protected:
-	unsigned int	m_vao;
-	unsigned int	m_vbo_verts;
-	int							m_numtriangles;
+	unsigned int m_vao;
+	unsigned int m_vbo_verts;
+	int m_numtriangles;
 
 public:
 	OGLMesh();

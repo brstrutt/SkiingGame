@@ -99,4 +99,3 @@ public:
 		theHUD->SetScreenSize(heightPntr, widthPntr);
 	}
 };
-

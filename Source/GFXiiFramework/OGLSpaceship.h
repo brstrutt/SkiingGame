@@ -12,14 +12,14 @@ private:
 	Vector3 nextPoint;
 
 	Vector3* playerPosition;
-		
+
 	void GenerateNextPoint(float playX, float playZ);
 
 public:
 	OGLSpaceship();
 	OGLSpaceship(OGLTerrainManager* floorTerrain);
 	~OGLSpaceship();
-			
+
 	void SetPlayerPosition(Vector3* newPlayerPos)
 	{
 		playerPosition = newPlayerPos;
@@ -41,4 +41,3 @@ public:
 		meshToDrop = newMesh;
 	}
 };
-

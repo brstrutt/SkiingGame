@@ -7,8 +7,8 @@
 class Player : public PhysicsObject
 {
 private:
-	Camera* theCamera;	
-	bool camLocked, lastXState;	
+	Camera* theCamera;
+	bool camLocked, lastXState;
 
 	void PrintSpeed();
 public:

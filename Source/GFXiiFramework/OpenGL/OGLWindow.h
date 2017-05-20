@@ -8,54 +8,54 @@
 
 class OGLWindow : public RenderWindow
 {
-	private:
-		HDC			m_hdc;				//handle to a device context
-		HGLRC		m_hglrc;			//handle to a gl rendering context
+private:
+	HDC m_hdc;				//handle to a device context
+	HGLRC m_hglrc;			//handle to a gl rendering context
 
-		int			m_width;
-		int			m_height;
-		
-		//the scene to be rendered
-		OGLScene m_scene;
+	int m_width;
+	int m_height;
 
-		//Declear an OGL shader program
-		OGLShaderProgram		*m_shader;
-		OGLShaderProgram		*m_skybox_shader;
-		OGLShaderProgram		*m_terrain_shader;
-		OGLShaderProgram		*m_billboard_shader;
-		OGLShaderProgram		*m_hud_shader;
-		int						m_uniform_texture;
-		int						m_texDefaultSampler;
+	//the scene to be rendered
+	OGLScene m_scene;
 
-		Camera m_camera;
-		Player playerChar;
+	//Declear an OGL shader program
+	OGLShaderProgram *m_shader;
+	OGLShaderProgram *m_skybox_shader;
+	OGLShaderProgram *m_terrain_shader;
+	OGLShaderProgram *m_billboard_shader;
+	OGLShaderProgram *m_hud_shader;
+	int m_uniform_texture;
+	int m_texDefaultSampler;
 
-		//MouseHack
-		bool LMBDown;
-		POINT mousePnt;
+	Camera m_camera;
+	Player playerChar;
+
+	//MouseHack
+	bool LMBDown;
+	POINT mousePnt;
 
 protected:
 
-		HGLRC CreateOGLContext (HDC hdc);
-		BOOL DestroyOGLContext();
-		void InitOGLState();
+	HGLRC CreateOGLContext (HDC hdc);
+	BOOL DestroyOGLContext();
+	void InitOGLState();
 
-	public:
-					OGLWindow();
-					OGLWindow(HINSTANCE hInstance, int width, int height);
-					~OGLWindow();
-		
-		BOOL		InitWindow(HINSTANCE hInstance, int width, int height);
+public:
+	OGLWindow();
+	OGLWindow(HINSTANCE hInstance, int width, int height);
+	~OGLWindow();
 
-		void		Render();
-		void		Resize( int width, int height );
-		void		DestroyRenderWindow();
+	BOOL InitWindow(HINSTANCE hInstance, int width, int height);
 
-		BOOL		MouseLBDown(POINT newLoc);
-		BOOL		MouseLBUp(POINT newLoc);
-		BOOL		MouseMove(POINT newLoc);
+	void Render();
+	void Resize( int width, int height );
+	void DestroyRenderWindow();
 
-		void MouseWheelMove(float distance);
+	BOOL MouseLBDown(POINT newLoc);
+	BOOL MouseLBUp(POINT newLoc);
+	BOOL MouseMove(POINT newLoc);
 
-		void CheckInput();
+	void MouseWheelMove(float distance);
+
+	void CheckInput();
 };
