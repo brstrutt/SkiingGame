@@ -41,46 +41,6 @@ void OGLTerrain::Render()
 	glBindVertexArray(0);
 }
 
-void OGLTerrain::GenerateFoliage()
-{
-	foliageNumber = (int)pow(squareNum,2);
-
-	foliages = new std::vector<RenderableObject<OGLBillboard>*>[foliageNumber];
-
-	float x, z;
-
-	OGLBillboard *tempBoard = new OGLBillboard("../asset/texture/grass.tga");
-	OGLTexture* lrGrass = new OGLTexture();
-	lrGrass->CreateTextureFromFile("../asset/texture/lowResGrass.tga");
-	tempBoard->SetTexture(false, lrGrass);
-	tempBoard->CreateBoard();
-
-	RenderableObject<OGLBillboard>* tempBillboard;
-
-	foliageNumber *= 5;	
-
-	int calcedIndex;
-
-	for (int i = 0; i < foliageNumber; i++)
-	{
-		x = (rand() % ((int)(squareNum * squareSize) + 1));
-		z = (rand() % ((int)(squareNum * squareSize) + 1));
-
-		tempBillboard = new RenderableObject<OGLBillboard>();
-		tempBillboard->SetRenderable(tempBoard);
-		tempBillboard->SetLocation(Vector3(x, GetHeightAtPoint(x, z), z));
-		tempBillboard->SetScale(0.1f);
-
-		x /= squareSize;
-		z /= squareSize;
-
-		//calculate nearest foilage area
-		calcedIndex = C2To1(x, z, squareNum);
-
-		foliages[calcedIndex].push_back(tempBillboard);
-	}
-}
-
 void OGLTerrain::CreateTerrain(int newSquareNum, float newSquareSize, int seed)
 {
 	srand(seed);
@@ -169,7 +129,7 @@ void OGLTerrain::CreateTerrain(int newSquareNum, float newSquareSize, int seed)
 
 	delete[] grid;
 
-	GenerateFoliage();
+	theGrass = new Foliage(newSquareNum, newSquareSize, this);
 }
 
 float* OGLTerrain::GenerateHeightMap(int squareNum)
@@ -502,125 +462,7 @@ Vector3 OGLTerrain::GetNormalAtPoint(float x, float z)
 
 void OGLTerrain::RenderFoliage(OGLShaderProgram* billShader, Vector3 camPos, Vector3 terrainLocation)
 {
-	while (camPos[0] > squareNum * squareSize)
-	{
-		camPos[0] -= squareNum * squareSize;
-	}
-	while (camPos[2] > squareNum * squareSize)
-	{
-		camPos[2] -= squareNum * squareSize;
-	}
-
-	while (camPos[0] < 0)
-	{
-		camPos[0] += squareNum * squareSize;
-	}
-	while (camPos[2] < 0)
-	{
-		camPos[2] += squareNum * squareSize;
-	}
-
-	int x = camPos[0] / squareSize + 0.5f;
-	int z = camPos[2] / squareSize + 0.5f;
-
-	int range = pow(25,2);
-
-	int* indexes = new int[range];
-	
-
-	//NOTE--------------------------------------------------------------------------------
-	//Algorithm happenings: the following is intended to arrange the located indexes from furthest to nearest for blending purposes
-	int sideSize = sqrt(range);
-
-	int dir = 0;
-	int *limits = new int[4];
-	//Xmax
-	limits[0] = sideSize;
-	//Ymax
-	limits[1] = sideSize;
-	//Xmin
-	limits[2] = -1;
-	//Ymin
-	limits[3] = -1;
-
-	int currX = 0, currY = 0;
-
-	for (int i = 0; i < range; i++)
-	{
-		//move based on direction
-		switch (dir)
-		{
-		case 0:
-			currX++;
-			break;
-		case 1:
-			currY++;
-			break;
-		case 2:
-			currX--;
-			break;
-		case 3:
-			currY--;
-			break;
-		}
-
-		indexes[i] = C2To1(x + (currX - floor(sideSize / 2)), z + (currY - floor(sideSize / 2)), squareNum);
-
-		//update direction
-		switch (dir)
-		{
-		case 0:
-			if (currX + 1 == limits[dir])
-			{
-				limits[3]++;
-				dir++;
-			}
-			break;
-		case 1:
-			if (currY + 1 == limits[dir])
-			{
-				limits[0]--;
-				dir++;
-			}
-			break;
-		case 2:
-			if (currX - 1 == limits[dir])
-			{
-				limits[1]--;
-				dir++;
-			}
-			break;
-		case 3:
-			if (currY - 1 == limits[dir])
-			{
-				limits[2]++;
-				dir = 0;
-			}
-			break;
-		}
-	}
-	
-	//Fancy index ordering end--------------------------------
-
-	Matrix4x4 tempMat = foliages[0].at(0)->GetModelMatrix();
-	for (int i = 0; i < range; i++)
-	{
-		if (foliages[indexes[i]].size() > 0)
-		{
-			for each (RenderableObject<OGLBillboard>* billboard in foliages[indexes[i]])
-			{
-				tempMat.SetValue(3, billboard->GetLocation()[0] + terrainLocation[0]);
-				tempMat.SetValue(7, billboard->GetLocation()[1] + terrainLocation[1]);
-				tempMat.SetValue(11, billboard->GetLocation()[2] + terrainLocation[2]);
-
-				glUniformMatrix4fv(glGetUniformLocation(billShader->GetProgramHandle(), "model"), 1, GL_FALSE, tempMat.GetMatrix());
-				glUniform1f(glGetUniformLocation(billShader->GetProgramHandle(), "scale"), billboard->GetScale());
-				glUniform3fv(glGetUniformLocation(billShader->GetProgramHandle(), "billboardUp"), 1, billboard->GetRotation().GetData());
-
-				billboard->GetRenderable()->Render();
-			}			
-		}		
-	}
+	theGrass->RenderFoliage(billShader, camPos, terrainLocation);
 }
 
 int OGLTerrain::C2To1(int x, int y, int lineLength)

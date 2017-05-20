@@ -2,6 +2,7 @@
 #include "OpenGL\OGLMesh.h"
 #include "OGLBillboard.h"
 #include "OpenGL\OGLShader.h"
+#include "Foliage.h"
 #include <vector>
 
 class OGLTerrain : public OGLMesh
@@ -9,16 +10,15 @@ class OGLTerrain : public OGLMesh
 private:
 	float* heightPoints;
 	Vector3* normals;
-	int squareNum;
+
 	int seaLevel;
+
+	int squareNum;
 	float squareSize;
+	
 	Vector3 topLeftPoint;
 
-	std::vector<RenderableObject<OGLBillboard>*>* foliages;
-	
-	int foliageNumber;
-
-	void GenerateFoliage();
+	Foliage *theGrass;
 
 public:
 	OGLTerrain();

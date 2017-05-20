@@ -16,6 +16,7 @@
     <ClInclude Include="BaseTexture.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="Collider.h" />
+    <ClInclude Include="Foliage.h" />
     <ClInclude Include="GFXiiFramework.h" />
     <ClInclude Include="GLEW\include\glew.h" />
     <ClInclude Include="GLEW\include\glxew.h" />
@@ -53,6 +54,7 @@
     <ClCompile Include="BaseApplication.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="Foliage.cpp" />
     <ClCompile Include="GFXiiFramework.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="ImageIO.cpp" />
